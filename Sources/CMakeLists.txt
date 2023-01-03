@@ -1,0 +1,3 @@
+add_subdirectory(Main)
+add_subdirectory(Algorithms)
+add_subdirectory(Interface)
