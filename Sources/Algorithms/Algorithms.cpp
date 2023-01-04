@@ -2,6 +2,8 @@
 #include <iostream>
 #include <opencv2/core/matx.hpp>
 #include <opencv2/highgui.hpp>
+#include <math.h>
+#include <opencv2/imgproc.hpp>
 
 using namespace std;
 
@@ -352,6 +354,239 @@ namespace Algo {
 		cv::imshow(windowName, outImage);
 		cv::waitKey(0);
 
+		return true;
+	}
+
+	void ALGORITHMS_API RGB_to_HSV(double R, double G, double B)
+	{
+		//We devide R, G and B by 255 to change the range from 0...255 to 0...1
+		R = R / 255.0;
+		G = G / 255.0;
+		B = B / 255.0;
+
+		double Cmax = max(R, max(G, B));
+		double Cmin = min(R, min(G, B));
+		double delta = Cmax - Cmin;
+
+		//Hue calculation
+		double H = -1;
+		if (delta == 0)
+			H = 0;
+		else if (Cmax == R)
+			H = 60 * fmod((G - B) / delta, 6);
+		else if (Cmax == G)
+			H = 60 * (((B - R) / delta) + 2);
+		else if (Cmax == B)
+			H = H = 60 * (((R - G) / delta) + 4);
+
+		//Saturation calculation
+		double S = -1;
+		if (Cmax == 0)
+			S = 0;
+		else
+			S = (delta / Cmax) * 100;
+
+		//Value calculation
+		double V = -1;
+		V = Cmax * 100;
+
+		//Print the conversion result
+		std::cout << "H: " << H << " S: " << S << " V: " << V << std::endl;
+	}
+
+	void ALGORITHMS_API BGR_to_HSV(double B, double G, double R)
+	{
+		//We devide B, G and R by 255 to change the range from 0...255 to 0...1
+		
+		B = B / 255.0;
+		G = G / 255.0;
+		R = R / 255.0;
+		
+
+		double Cmax = max(B, max(G, R));
+		double Cmin = min(B, min(G, R));
+		double delta = Cmax - Cmin;
+
+		//Hue calculation
+		double H = -1;
+		if (delta == 0)
+			H = 0;
+		else if (Cmax == B)
+			H = 60 * fmod((G - B) / delta, 6);
+		else if (Cmax == G)
+			H = 60 * (((B - R) / delta) + 2);
+		else if (Cmax == R)
+			H = H = 60 * (((R - G) / delta) + 4);
+
+		//Saturation calculation
+		double S = -1;
+		if (Cmax == 0)
+			S = 0;
+		else
+			S = (delta / Cmax) * 100;
+
+		//Value calculation
+		double V = -1;
+		V = Cmax * 100;
+
+		//Print the conversion result
+		std::cout << "H: " << H << " S: " << S << " V: " << V << std::endl;
+	}
+
+	void ALGORITHMS_API HSV_to_RGB(double H, double S, double V) 
+	{
+		double C = S * V;
+		double X = C * (1 - fmod(H/60, 2) - 1);
+		double m = V - C;
+		double R = -1,  G = -1,  B = -1;
+		if (H < 60 && H >= 0)
+		{
+			R = C;
+			G = X;
+			B = 0;
+		}
+		else if (H < 120 && H >= 60)
+		{
+			R = X;
+			G = C;
+			B = 0;
+		}
+		else if (H < 180 && H >= 120)
+		{
+			R = 0;
+			G = C;
+			B = X;
+		}
+		else if (H < 240 && H >= 180)
+		{
+			R = 0;
+			G = X;
+			B = C;
+		}
+		else if (H < 300 && H >= 240)
+		{
+			R = X;
+			G = 0;
+			B = C;
+		}
+		else if (H < 360 && H >= 300)
+		{
+			R = C;
+			G = 0;
+			B = X;
+		}
+
+		R = (R + m) * 2.55;
+		G = (G + m) * 2.55;
+		B = (B + m) * 2.55;
+
+		//Print the conversion result
+		std::cout << "R: " << R << " G: " << G << " B: " << B << std::endl;
+
+	}
+
+	/*bool ALGORITHMS_API HSV_to_BGR()
+	{
+
+	}*/
+
+	bool ALGORITHMS_API RGB_to_HSV_imagesOpenCV(const cv::Mat& inImage, cv::Mat& outImage)
+	{
+		//Verify if inImage parameter represents a valid input image
+		if (inImage.empty())
+		{
+			std::cout << "The image was not loaded or the image is empty!" << std::endl;
+			return false;
+		}
+
+		const int noOfChannels = inImage.channels();
+
+		//Verify if the image has 3 channels
+		if (noOfChannels != 3)
+		{
+			std::cout << "No support for images with less then 3 channels!" << std::endl;
+			return false;
+		}
+
+		// Output image - memory allocation
+		outImage = cv::Mat::zeros(inImage.rows, inImage.cols, CV_8UC3);
+
+		cv::cvtColor(inImage, outImage, cv::COLOR_RGB2HSV);
+		return true;
+	}
+
+	bool ALGORITHMS_API BGR_to_HSV_imagesOpenCV(const cv::Mat& inImage, cv::Mat& outImage)
+	{
+		//Verify if inImage parameter represents a valid input image
+		if (inImage.empty())
+		{
+			std::cout << "The image was not loaded or the image is empty!" << std::endl;
+			return false;
+		}
+
+		const int noOfChannels = inImage.channels();
+
+		//Verify if the image has 3 channels
+		if (noOfChannels != 3)
+		{
+			std::cout << "No support for images with less then 3 channels!" << std::endl;
+			return false;
+		}
+
+		// Output image - memory allocation
+		outImage = cv::Mat::zeros(inImage.rows, inImage.cols, CV_8UC3);
+
+		cv::cvtColor(inImage, outImage, cv::COLOR_BGR2HSV);
+		return true;
+	}
+
+	bool ALGORITHMS_API HSV_to_RGB_imagesOpenCV(const cv::Mat& inImage, cv::Mat& outImage)
+	{
+		//Verify if inImage parameter represents a valid input image
+		if (inImage.empty())
+		{
+			std::cout << "The image was not loaded or the image is empty!" << std::endl;
+			return false;
+		}
+
+		const int noOfChannels = inImage.channels();
+
+		//Verify if the image has 3 channels
+		if (noOfChannels != 3)
+		{
+			std::cout << "No support for images with less then 3 channels!" << std::endl;
+			return false;
+		}
+
+		// Output image - memory allocation
+		outImage = cv::Mat::zeros(inImage.rows, inImage.cols, CV_8UC3);
+
+		cv::cvtColor(inImage, outImage, cv::COLOR_HSV2RGB);
+		return true;
+	}
+
+	bool ALGORITHMS_API HSV_to_BGR_imagesOpenCV(const cv::Mat& inImage, cv::Mat& outImage)
+	{
+		//Verify if inImage parameter represents a valid input image
+		if (inImage.empty())
+		{
+			std::cout << "The image was not loaded or the image is empty!" << std::endl;
+			return false;
+		}
+
+		const int noOfChannels = inImage.channels();
+
+		//Verify if the image has 3 channels
+		if (noOfChannels != 3)
+		{
+			std::cout << "No support for images with less then 3 channels!" << std::endl;
+			return false;
+		}
+
+		// Output image - memory allocation
+		outImage = cv::Mat::zeros(inImage.rows, inImage.cols, CV_8UC3);
+
+		cv::cvtColor(inImage, outImage, cv::COLOR_HSV2BGR);
 		return true;
 	}
 }

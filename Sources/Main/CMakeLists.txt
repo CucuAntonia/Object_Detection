@@ -23,11 +23,14 @@ endif()
 
 add_dependencies(${PROJECT_NAME}
 	Algorithms
+	Interface
 )
 
 target_include_directories(${PROJECT_NAME} PUBLIC
 	${OpenCV_INCLUDE_DIRS}
 	${CMAKE_SOURCE_DIR}/Sources/Algorithms
+	${CMAKE_SOURCE_DIR}/Sources/Interface
+
 	
 )
 
@@ -41,6 +44,7 @@ target_link_libraries(${PROJECT_NAME}
 	Qt5::Widgets
 	${OpenCV_LIBS}
 	Algorithms.lib
+	Interface.lib
 )
 
 

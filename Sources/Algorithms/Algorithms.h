@@ -100,12 +100,20 @@ namespace Algo {
 	///@return bool
 	bool ALGORITHMS_API DisplayImage(cv::Mat& outImage, FilterName filterName);
 
-	bool ALGORITHMS_API RGB_to_HSV();
+	void ALGORITHMS_API RGB_to_HSV(double R, double G, double B);
 
-	bool ALGORITHMS_API BGR_to_HSV();
+	void ALGORITHMS_API BGR_to_HSV(double B, double G, double R);
 
-	bool ALGORITHMS_API HSV_to_RGB();
+	void ALGORITHMS_API HSV_to_RGB(double H, double S, double V);
 
-	bool ALGORITHMS_API HSV_to_BGR();
+	void ALGORITHMS_API HSV_to_BGR();
+
+	bool ALGORITHMS_API RGB_to_HSV_imagesOpenCV(const cv::Mat& inImage, cv::Mat& outImage);
+
+	bool ALGORITHMS_API BGR_to_HSV_imagesOpenCV(const cv::Mat& inImage, cv::Mat& outImage);
+
+	bool ALGORITHMS_API HSV_to_RGB_imagesOpenCV(const cv::Mat& inImage, cv::Mat& outImage);
+
+	bool ALGORITHMS_API HSV_to_BGR_imagesOpenCV(const cv::Mat& inImage, cv::Mat& outImage);
 
 }
