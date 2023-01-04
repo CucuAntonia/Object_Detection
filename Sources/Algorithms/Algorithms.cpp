@@ -589,4 +589,54 @@ namespace Algo {
 		cv::cvtColor(inImage, outImage, cv::COLOR_HSV2BGR);
 		return true;
 	}
+
+	bool ALGORITHMS_API RGB_to_BGR_imagesOpenCV(const cv::Mat& inImage, cv::Mat& outImage)
+	{
+		//Verify if inImage parameter represents a valid input image
+		if (inImage.empty())
+		{
+			std::cout << "The image was not loaded or the image is empty!" << std::endl;
+			return false;
+		}
+
+		const int noOfChannels = inImage.channels();
+
+		//Verify if the image has 3 channels
+		if (noOfChannels != 3)
+		{
+			std::cout << "No support for images with less then 3 channels!" << std::endl;
+			return false;
+		}
+
+		// Output image - memory allocation
+		outImage = cv::Mat::zeros(inImage.rows, inImage.cols, CV_8UC3);
+
+		cv::cvtColor(inImage, outImage, cv::COLOR_RGB2BGR);
+		return true;
+	}
+
+	bool ALGORITHMS_API BGR_to_RGB_imagesOpenCV(const cv::Mat& inImage, cv::Mat& outImage)
+	{
+		//Verify if inImage parameter represents a valid input image
+		if (inImage.empty())
+		{
+			std::cout << "The image was not loaded or the image is empty!" << std::endl;
+			return false;
+		}
+
+		const int noOfChannels = inImage.channels();
+
+		//Verify if the image has 3 channels
+		if (noOfChannels != 3)
+		{
+			std::cout << "No support for images with less then 3 channels!" << std::endl;
+			return false;
+		}
+
+		// Output image - memory allocation
+		outImage = cv::Mat::zeros(inImage.rows, inImage.cols, CV_8UC3);
+
+		cv::cvtColor(inImage, outImage, cv::COLOR_BGR2RGB);
+		return true;
+	}
 }

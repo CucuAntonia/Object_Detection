@@ -24,6 +24,8 @@ int main(int argc, char* argv[]) {
 	Mat outImage2;
 	Mat outImage3;
 	Mat outImage4;
+	Mat outImage5;
+	Mat outImage6;
 
 	cv::imshow("Original", inImage);
 
@@ -43,6 +45,13 @@ int main(int argc, char* argv[]) {
 	cv::imshow("HSV2BGR", outImage4);
 	std::cout << r4 << std::endl;
 
+	bool r5 = Algo::RGB_to_BGR_imagesOpenCV(inImage, outImage5);
+	cv::imshow("RGB2BGR", outImage5);
+	std::cout << r5 << std::endl;
+
+	bool r6 = Algo::BGR_to_RGB_imagesOpenCV(inImage, outImage6);
+	cv::imshow("BGR2RGB", outImage4);
+	std::cout << r6 << std::endl;
 
 	VideoCapture cap(0);
 	if (!cap.isOpened()) {

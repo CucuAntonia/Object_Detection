@@ -116,4 +116,8 @@ namespace Algo {
 
 	bool ALGORITHMS_API HSV_to_BGR_imagesOpenCV(const cv::Mat& inImage, cv::Mat& outImage);
 
+	bool ALGORITHMS_API RGB_to_BGR_imagesOpenCV(const cv::Mat& inImage, cv::Mat& outImage);
+
+	bool ALGORITHMS_API BGR_to_RGB_imagesOpenCV(const cv::Mat& inImage, cv::Mat& outImage);
+
 }
