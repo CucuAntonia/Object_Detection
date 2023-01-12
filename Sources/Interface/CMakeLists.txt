@@ -33,6 +33,7 @@ endif()
 
 target_link_libraries(${PROJECT_NAME} 
 		      Algorithms.lib
+		      Utils.lib
 		      Qt5::Widgets 
 		      Qt5::Core
 		      ${OpenCV_LIBS}
@@ -40,12 +41,14 @@ target_link_libraries(${PROJECT_NAME}
 
 target_include_directories(${PROJECT_NAME} PUBLIC
 	${CMAKE_SOURCE_DIR}/Sources/Algorithms
+	${CMAKE_SOURCE_DIR}/Sources/Utils
 	${OpenCV_INCLUDE_DIRS}
 	
 )
 
 add_dependencies(${PROJECT_NAME}
 			Algorithms
+			Utils
 			)
 
 #Link this project with the runtime output dir. Algo and Utils are also linked to this 

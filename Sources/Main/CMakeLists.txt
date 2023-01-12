@@ -22,15 +22,18 @@ if( NOT Qt5Widgets_FOUND )
 endif()
 
 add_dependencies(${PROJECT_NAME}
+	Utils
 	Algorithms
 	Interface
-)
 
+
+	
+)
 target_include_directories(${PROJECT_NAME} PUBLIC
-	${OpenCV_INCLUDE_DIRS}
+	${CMAKE_SOURCE_DIR}/Sources/Utils
 	${CMAKE_SOURCE_DIR}/Sources/Algorithms
 	${CMAKE_SOURCE_DIR}/Sources/Interface
-
+	${OpenCV_INCLUDE_DIRS}
 	
 )
 
@@ -40,11 +43,15 @@ target_link_directories(${PROJECT_NAME} PUBLIC
 )
 
 target_link_libraries(${PROJECT_NAME} 
+	Utils.lib
+	Algorithms.lib
+	Interface.lib
 	Qt5::Gui
 	Qt5::Widgets
 	${OpenCV_LIBS}
-	Algorithms.lib
-	Interface.lib
+	
+	
+	
 )
 
 
