@@ -13,7 +13,7 @@ int main(int argc, char* argv[]) {
 
 	QApplication a(argc, argv);
 	MainWindow w;
-	w.resize(1200, 800);
+	w.resize(650, 650);
 	w.show();
 
 	/*

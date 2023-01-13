@@ -33,6 +33,8 @@ private slots:
 
     void on_startweb_button_clicked();
 
+    void on_objdet_btn_clicked();
+
 private:
     Ui::MainWindow *ui;
 };
