@@ -1,5 +1,8 @@
-
 #include <QMainWindow>
+#include <opencv2/opencv.hpp>
+#include "Camera.h"
+#include <QFileDialog>
+#include "Utils.h"
 
 #ifdef UI_EXPORT
 #define UI_API __declspec(dllexport)
@@ -25,6 +28,10 @@ private slots:
     void on_actionSave_triggered();
 
     void on_actionExit_triggered();
+
+    void DisplayWebcam();
+
+    void on_startweb_button_clicked();
 
 private:
     Ui::MainWindow *ui;

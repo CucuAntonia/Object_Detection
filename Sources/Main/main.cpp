@@ -16,7 +16,7 @@ int main(int argc, char* argv[]) {
 	w.resize(1200, 800);
 	w.show();
 
-	
+	/*
 	Algo::RGB_to_HSV(129, 100, 89);
 	Algo::HSV_to_RGB(130, 98, 100);
 	Algo::BGR_to_HSV(129, 100, 89);
@@ -53,9 +53,9 @@ int main(int argc, char* argv[]) {
 
 	bool r6 = Algo::BGR_to_RGB_imagesOpenCV(inImage, outImage6);
 	cv::imshow("BGR2RGB", outImage4);
-	std::cout << r6 << std::endl;
+	std::cout << r6 << std::endl;*/
 
-	OpenCamera();
+	
 	
 	return a.exec();
 	return 0;

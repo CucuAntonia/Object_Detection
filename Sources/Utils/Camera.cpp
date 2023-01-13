@@ -2,14 +2,15 @@
 #include <opencv2/opencv.hpp>
 
 
-void UTILS_API OpenCamera()
+ bool UTILS_API OpenCamera()
 
 {
 	cv::VideoCapture cap(0);
 	if (!cap.isOpened()) {
 		std::cout << "Cannot open camera" << std::endl;
-		//return -1;
+		return -1;
 	}
+	
 	while (true) {
 		cv::Mat frame;
 		cap.read(frame);
@@ -23,7 +24,7 @@ void UTILS_API OpenCamera()
 
 		if (cv::waitKey(30) == 27)
 			break;
-		//return 1;
+		return 1;
 		
 
 

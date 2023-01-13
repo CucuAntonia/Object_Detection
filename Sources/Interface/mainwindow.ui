@@ -6,35 +6,62 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>547</width>
-    <height>421</height>
+    <width>650</width>
+    <height>508</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="originalvid">
-    <property name="geometry">
-     <rect>
-      <x>26</x>
-      <y>40</y>
-      <width>491</width>
-      <height>321</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string/>
-    </property>
-   </widget>
+   <layout class="QVBoxLayout" name="verticalLayout">
+    <item>
+     <widget class="QLabel" name="original_vid">
+      <property name="text">
+       <string/>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <spacer name="verticalSpacer">
+      <property name="orientation">
+       <enum>Qt::Vertical</enum>
+      </property>
+      <property name="sizeHint" stdset="0">
+       <size>
+        <width>20</width>
+        <height>40</height>
+       </size>
+      </property>
+     </spacer>
+    </item>
+    <item>
+     <layout class="QHBoxLayout" name="horizontalLayout">
+      <item>
+       <widget class="QPushButton" name="startweb_button">
+        <property name="text">
+         <string>Start Webcam</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="objdet_btn">
+        <property name="text">
+         <string>PushButton</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </item>
+   </layout>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>547</width>
-     <height>17</height>
+     <width>650</width>
+     <height>18</height>
     </rect>
    </property>
    <widget class="QMenu" name="menuFile">
@@ -50,10 +77,12 @@
     <property name="title">
      <string>Color Conversion</string>
     </property>
-    <addaction name="actionHSV_to_RGB"/>
-    <addaction name="actionHSV_to_BGR"/>
     <addaction name="actionRGB_to_HSV"/>
     <addaction name="actionBGR_to_HSV"/>
+    <addaction name="actionHSV_to_RGB"/>
+    <addaction name="actionHSV_to_BGR"/>
+    <addaction name="actionRGB_to_BGR"/>
+    <addaction name="actionBGR_to_RGB"/>
    </widget>
    <addaction name="menuFile"/>
    <addaction name="menuColor_Conversion"/>
@@ -83,6 +112,16 @@
     <string>Esc</string>
    </property>
   </action>
+  <action name="actionRGB_to_HSV">
+   <property name="text">
+    <string>RGB to HSV</string>
+   </property>
+  </action>
+  <action name="actionBGR_to_HSV">
+   <property name="text">
+    <string>BGR to HSV</string>
+   </property>
+  </action>
   <action name="actionHSV_to_RGB">
    <property name="text">
     <string>HSV to RGB</string>
@@ -93,14 +132,14 @@
     <string>HSV to BGR</string>
    </property>
   </action>
-  <action name="actionRGB_to_HSV">
+  <action name="actionRGB_to_BGR">
    <property name="text">
-    <string>RGB to HSV</string>
+    <string>RGB to BGR</string>
    </property>
   </action>
-  <action name="actionBGR_to_HSV">
+  <action name="actionBGR_to_RGB">
    <property name="text">
-    <string>BGR to HSV</string>
+    <string>BGR to RGB</string>
    </property>
   </action>
  </widget>

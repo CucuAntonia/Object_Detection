@@ -3,7 +3,8 @@
 #include "Utils.h"
 
 
-void UTILS_API OpenCamera();
+
+bool UTILS_API OpenCamera();
 
    
 
