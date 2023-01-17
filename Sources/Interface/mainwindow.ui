@@ -97,8 +97,15 @@
     <addaction name="actionRGB_to_BGR"/>
     <addaction name="actionBGR_to_RGB"/>
    </widget>
+   <widget class="QMenu" name="menuHelp">
+    <property name="title">
+     <string>Help</string>
+    </property>
+    <addaction name="actionOpen_Help_Page"/>
+   </widget>
    <addaction name="menuFile"/>
    <addaction name="menuColor_Conversion"/>
+   <addaction name="menuHelp"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
   <action name="actionOpen">
@@ -153,6 +160,14 @@
   <action name="actionBGR_to_RGB">
    <property name="text">
     <string>BGR to RGB</string>
+   </property>
+  </action>
+  <action name="actionOpen_Help_Page">
+   <property name="text">
+    <string>Open Help Page</string>
+   </property>
+   <property name="shortcut">
+    <string>Ctrl+H</string>
    </property>
   </action>
  </widget>

@@ -559,6 +559,7 @@ namespace Algo {
 		}
 
 		// Output image - memory allocation
+		//fara alocare, timpul crescut 
 		outImage = cv::Mat::zeros(inImage.rows, inImage.cols, CV_8UC3);
 
 		cv::cvtColor(inImage, outImage, cv::COLOR_HSV2RGB);

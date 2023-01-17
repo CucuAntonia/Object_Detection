@@ -12,6 +12,13 @@ int main(int argc, char* argv[]) {
 
 
 	QApplication a(argc, argv);
+	//Set the application stylesheet
+		//__FILE__
+	/*QString pathToQss = "C:\\Users\\Antonia\\Desktop\\qss\\QSS\\ElegantDark.qss";
+	QFile styleSheetFile(pathToQss);
+	styleSheetFile.open(QFile::ReadOnly);
+	QString styleSheet = QLatin1String(styleSheetFile.readAll());
+	a.setStyleSheet(styleSheet);*/
 	MainWindow w;
 	w.resize(650, 650);
 	w.show();
@@ -54,7 +61,7 @@ int main(int argc, char* argv[]) {
 	bool r6 = Algo::BGR_to_RGB_imagesOpenCV(inImage, outImage6);
 	cv::imshow("BGR2RGB", outImage4);
 	std::cout << r6 << std::endl;*/
-
+	
 	
 	
 	return a.exec();
