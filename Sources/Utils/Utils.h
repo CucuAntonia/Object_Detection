@@ -35,7 +35,7 @@ namespace Utils
 	///@param cv::Mat inImage1 
 	///@param cv::Mat inImage2
 	///@return bool
-	bool UTILS_API GetDisimilarityMat(cv::Mat inImage1, cv::Mat inImage2);
+	double UTILS_API GetDisimilarityMat(cv::Mat inImage1, cv::Mat inImage2);
 
 	///@brief Function to check the difference between are two QImage images.
 	///@details It returns true or false, depending on the disimilarity percentage.

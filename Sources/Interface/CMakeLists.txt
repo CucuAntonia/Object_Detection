@@ -5,6 +5,7 @@ set(LibrarySources
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
+	
 )
 
 #CMake will handle the Qt moc preprocessor automatically, i.e. without having to use the QT4_WRAP_CPP()

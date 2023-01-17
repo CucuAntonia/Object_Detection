@@ -100,24 +100,22 @@ namespace Algo {
 	///@return bool
 	bool ALGORITHMS_API DisplayImage(cv::Mat& outImage, FilterName filterName);
 
-	void ALGORITHMS_API RGB_to_HSV(double R, double G, double B);
+	bool ALGORITHMS_API RGB_to_HSV_pixels(const cv::Mat& inImage, cv::Mat& outImage);
 
-	void ALGORITHMS_API BGR_to_HSV(double B, double G, double R);
+	bool ALGORITHMS_API BGR_to_HSV_pixels(const cv::Mat& inImage, cv::Mat& outImage);
 
-	void ALGORITHMS_API HSV_to_RGB(double H, double S, double V);
+	bool ALGORITHMS_API HSV_to_RGB_pixels(const cv::Mat& inImage, cv::Mat& outImage);
 
-	void ALGORITHMS_API HSV_to_BGR();
+	bool ALGORITHMS_API HSV_to_BGR_pixels(const cv::Mat& inImage, cv::Mat& outImage);
 
-	bool ALGORITHMS_API RGB_to_HSV_imagesOpenCV(const cv::Mat& inImage, cv::Mat& outImage);
+	bool ALGORITHMS_API RGB_to_BGR_pixels(const cv::Mat& inImage, cv::Mat& outImage);
 
-	bool ALGORITHMS_API BGR_to_HSV_imagesOpenCV(const cv::Mat& inImage, cv::Mat& outImage);
+	bool ALGORITHMS_API BGR_to_RGB_pixels(const cv::Mat& inImage, cv::Mat& outImage);
 
-	bool ALGORITHMS_API HSV_to_RGB_imagesOpenCV(const cv::Mat& inImage, cv::Mat& outImage);
 
-	bool ALGORITHMS_API HSV_to_BGR_imagesOpenCV(const cv::Mat& inImage, cv::Mat& outImage);
+	enum ConversionSpace {
+		RGB_to_HSV, HSV_to_RGB, RGB_to_BGR, BGR_to_RGB, BGR_to_HSV, HSV_to_BGR
+	};
 
-	bool ALGORITHMS_API RGB_to_BGR_imagesOpenCV(const cv::Mat& inImage, cv::Mat& outImage);
-
-	bool ALGORITHMS_API BGR_to_RGB_imagesOpenCV(const cv::Mat& inImage, cv::Mat& outImage);
-
+	bool ALGORITHMS_API ConvertTo_usingOpenCVFunctions(const cv::Mat& inImage, cv::Mat& outImage, ConversionSpace conversionspace);
 }

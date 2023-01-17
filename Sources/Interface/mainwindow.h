@@ -5,6 +5,7 @@
 #include "Utils.h"
 #include <qtimer.h>
 
+
 #ifdef UI_EXPORT
 #define UI_API __declspec(dllexport)
 #else
@@ -49,5 +50,6 @@ private:
     cv::VideoCapture m_capWebcam;
     QImage qimage_frame;
     QTimer* timer;
+    //SecondMainWindow* secondMW;
 };
 

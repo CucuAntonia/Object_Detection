@@ -75,6 +75,8 @@ void MainWindow::on_startweb_button_clicked()
 
 void MainWindow::on_objdet_btn_clicked()
 {
+	/*secondMW = new SecondMainWindow(this);
+	secondMW->show();*/
 	close();
 }
 

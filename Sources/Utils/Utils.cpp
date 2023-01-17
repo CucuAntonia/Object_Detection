@@ -96,7 +96,7 @@ namespace Utils
         return true;
     }
 
-    bool GetDisimilarityMat(cv::Mat inImage1, cv::Mat inImage2)
+    double GetDisimilarityMat(cv::Mat inImage1, cv::Mat inImage2)
     {
         double totaldiff = 0.0;
         int r1 = inImage1.rows;
@@ -118,10 +118,11 @@ namespace Utils
             }
         }
         double rate = (totaldiff * 100) / (r1 * c1 * 3);
-        if (rate < 5)
+        return rate;
+        /*if (rate < 5)
             return true;
         else
-            return false;
+            return false;*/
     }
 
     bool UTILS_API GetDisimilarityQImage(QImage inImage1, QImage inImage2)
