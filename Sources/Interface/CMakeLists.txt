@@ -5,6 +5,9 @@ set(LibrarySources
         mainwindow.cpp
         mainwindow.h
         mainwindow.ui
+	secondmainwindow.ui
+	secondmainwindow.cpp
+	secondmainwindow.h
 	
 )
 

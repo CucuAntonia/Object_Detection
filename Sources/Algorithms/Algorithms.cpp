@@ -377,57 +377,56 @@ namespace Algo {
 		}
 
 		// Output image - memory allocation
-		outImage = cv::Mat::zeros(inImage.rows, inImage.cols, CV_8UC3);
+		outImage = cv::Mat::zeros(inImage.rows, inImage.cols, CV_16SC3);
 		for (int r = 0; r < inImage.rows; r++)
 		{
 			const cv::Vec3b* pInImage = inImage.ptr<cv::Vec3b>(r);
-			cv::Vec3b* pOutImage = outImage.ptr<cv::Vec3b>(r);
+			cv::Vec3s* pOutImage = outImage.ptr<cv::Vec3s>(r);
 
 			for (int c = 0; c < inImage.cols; c++)
 			{
-				uchar red = pInImage[c][0];
-				uchar green = pInImage[c][1];
-				uchar blue = pInImage[c][2];
+				float red = pInImage[c][2] / 255.;
+				float green = pInImage[c][1] / 255.;
+				float blue = pInImage[c][0] / 255.;
 				/*uchar blue = inImage.at<cv::Vec3b>(r, c)[0];
 				uchar green = inImage.at<cv::Vec3b>(r, c)[1];
 				uchar red = inImage.at<cv::Vec3b>(r, c)[2];*/
 
 				//We devide R, G and B by 255 to change the range from 0...255 to 0...1
-				/*blue = blue / 255.0;
-				green = green / 255.0;
-				red = red / 255.0;*/
+				
 
-				uchar MaxValueRGB = max(red, max(green, blue));
-				uchar MinValueRGB = min(red, min(green, blue));
+				float MaxValueRGB = max(red, max(green, blue));
+				float MinValueRGB = min(red, min(green, blue));
 
 				//Hue calculation
-				uchar hue = -1;
+				short hue = 0;
 				if (MaxValueRGB - MinValueRGB == 0)
 					hue = 0;
 				else if (MaxValueRGB == red)
-					hue = 60 *((green - blue) / (MaxValueRGB - MinValueRGB) % 360);
+					hue = 60 * ((green - blue) / (MaxValueRGB - MinValueRGB));
 					//hue = 0 + 43 *((green - blue) / (MaxValueRGB - MinValueRGB));
 				else if (MaxValueRGB == green)
-					hue = 60 * (((blue - red) / (MaxValueRGB - MinValueRGB)) + 120);
+					hue = 60 * (((blue - red) / (MaxValueRGB - MinValueRGB)) + 2);
 					//hue = 85 + 43 * (((blue - red) / (MaxValueRGB - MinValueRGB)));
 				else if (MaxValueRGB == blue)
-					hue = 60 * (((red - green) / (MaxValueRGB - MinValueRGB)) + 240);
+					hue = 60 * (((red - green) / (MaxValueRGB - MinValueRGB)) + 4);
 					//hue = 171 + 43 * (((red - green) / (MaxValueRGB - MinValueRGB)));
 
+			
 
 				//Saturation calculation
-				uchar saturation = -1;
+				short saturation = 0;
 				if (MaxValueRGB == 0)
 					saturation = 0;
 				else
-					saturation = ((MaxValueRGB - MinValueRGB) / MaxValueRGB)*100 ;
+					saturation = ((MaxValueRGB - MinValueRGB) / MaxValueRGB) * 255;
 
 				//Value calculation
-				uchar value = -1;
-				value = MaxValueRGB;
+				short value = 0;
+				value = MaxValueRGB * 255;
 
-				hue = (hue - 0) / (255 - 0) * 179;
-				;
+				//hue = hue /360 * 179;
+				
 
 				pOutImage[c][0] = hue;
 				pOutImage[c][1] = saturation;
@@ -611,10 +610,93 @@ namespace Algo {
 
 	//}
 
-	/*bool HSV_to_BGR(const cv::Mat& inImage, cv::Mat& outImage)
+	bool ALGORITHMS_API HSV_to_BGR_pixels(const cv::Mat& inImage, cv::Mat& outImage)
 	{
+		//Verify if inImage parameter represents a valid input image
+		if (inImage.empty())
+		{
+			std::cout << "The image was not loaded or the image is empty!" << std::endl;
+			return false;
+		}
 
-	}*/
+		const int noOfChannels = inImage.channels();
+
+		//Verify if the image has 3 channels
+		if (noOfChannels != 3)
+		{
+			std::cout << "No support for images with less then 3 channels!" << std::endl;
+			return false;
+		}
+
+		// Output image - memory allocation
+		outImage = cv::Mat::zeros(inImage.rows, inImage.cols, CV_32SC3);
+
+		// Iteram prin fiecare pixel al imaginii HSV
+		for (int i = 0; i < inImage.rows; i++) {
+			for (int j = 0; j < inImage.cols; j++) {
+				// Accesam valorile H, S si V ale pixelului curent
+				int H = inImage.at<cv::Vec3b>(i, j)[0];
+				int S = inImage.at<cv::Vec3b>(i, j)[1];
+				int V = inImage.at<cv::Vec3b>(i, j)[2];
+
+				// Convertim H din intervalul [0,255] in intervalul [0, 360]
+				H = H * 360 / 255;
+
+				// Convertim S din intervalul [0,255] in intervalul [0, 100]
+				S = S * 100 / 255;
+
+				// Convertim V din intervalul [0,255] in intervalul [0, 255]
+				V = V;
+
+				int C = V * S / 100;
+				int X = C * (1 - abs((H / 60) % 2 - 1));
+				int m = V - C;
+				int R, G, B;
+
+				if (H >= 0 && H < 60) {
+					R = C;
+					G = X;
+					B = 0;
+				}
+				else if (H >= 60 && H < 120) {
+					R = X;
+					G = C;
+					B = 0;
+				}
+				else if (H >= 120 && H < 180) {
+					R = 0;
+					G = C;
+					B = X;
+				}
+				else if (H >= 180 && H < 240) {
+					R = 0;
+					G = X;
+					B = C;
+				}
+				else if (H >= 240 && H < 300) {
+					R = X;
+					G = 0;
+					B = C;
+				}
+				else {
+					R = C;
+					G = 0;
+					B = X;
+				}
+
+				R = (R + m) * 255 / 100;
+				G = (G + m) * 255 / 100;
+				B = (B + m) * 255 / 100;
+
+
+				// Atribuim valorile R, G si B pixelului curent din imaginea BGR
+				outImage.at<cv::Vec3b>(i, j)[0] = B;
+				outImage.at<cv::Vec3b>(i, j)[1] = G;
+				outImage.at<cv::Vec3b>(i, j)[2] = R;
+			}
+		}
+		return true;
+	}
 
 	bool RGB_to_BGR_pixels(const cv::Mat& inImage, cv::Mat& outImage)
 	{

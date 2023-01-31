@@ -4,6 +4,8 @@
 #include <QFileDialog>
 #include "Utils.h"
 #include <qtimer.h>
+#include "secondmainwindow.h"
+
 
 
 #ifdef UI_EXPORT
@@ -50,6 +52,6 @@ private:
     cv::VideoCapture m_capWebcam;
     QImage qimage_frame;
     QTimer* timer;
-    //SecondMainWindow* secondMW;
+    SecondMainWindow* secondMW;
 };
 

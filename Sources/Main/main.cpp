@@ -57,17 +57,24 @@ int main(int argc, char* argv[]) {
 
 	bool result2 = Algo::ConvertTo_usingOpenCVFunctions(inImage, outImage2, Algo::ConversionSpace::RGB_to_HSV);
 	bool result3 = Algo::RGB_to_HSV_pixels(inImage, outImage3);
+
 	cv::imshow("RGB-HSV", outImage2);
 	cv::imshow("RGB-HSV-pixel", outImage3);
 	std::cout << Utils::GetDisimilarityMat(outImage2, outImage3) << std::endl;
-	
+	std::cout << inImage.channels() << std::endl;
+	std::cout << outImage2.channels() << std::endl;
+	std::cout << outImage3.channels() << std::endl;
 
+	/*bool result2 = Algo::ConvertTo_usingOpenCVFunctions(inImage, outImage2, Algo::ConversionSpace::HSV_to_BGR);
+	bool result3 = Algo::HSV_to_BGR_pixels(inImage, outImage3);
 
-
-
-	
-
-	
+	cv::imshow("HSV-BGR", outImage2);
+	cv::imshow("HSV-BGR-pixel", outImage3);
+	std::cout << Utils::GetDisimilarityMat(outImage2, outImage3) << std::endl;
+	std::cout << inImage.channels() << std::endl;
+	std::cout << outImage2.channels() << std::endl;
+	std::cout << outImage3.channels() << std::endl;
+	*/
 	return a.exec();
 	return 0;
 	
